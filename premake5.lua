@@ -19,3 +19,4 @@ project "hangman"
         "%{prj.name}/src/**.h",
         "%{prj.name}/src/**.cpp"
     }  
+        

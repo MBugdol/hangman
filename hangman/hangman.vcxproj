@@ -74,9 +74,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\ArtBox.h" />
+    <ClInclude Include="src\Box.h" />
+    <ClInclude Include="src\ScreenManager.h" />
     <ClInclude Include="src\WordManager.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\ArtBox.cpp" />
+    <ClCompile Include="src\Box.cpp" />
+    <ClCompile Include="src\ScreenManager.cpp" />
     <ClCompile Include="src\WordManager.cpp" />
     <ClCompile Include="src\main.cpp" />
   </ItemGroup>

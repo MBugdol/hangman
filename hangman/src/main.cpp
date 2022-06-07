@@ -1,15 +1,21 @@
-#include "WordManager.h"
+#include "ArtBox.h"
+#include <string>
 #include <iostream>
-
 int main() {
-	WordManager wordmng("Jerzy Bodzenta przyjaciel studenta");
-	wordmng.encrypt();
-	wordmng.print();
-	char ch;
-	while(std::cin >> ch){
-		wordmng.decrypt(ch);
-		std::cout << std::endl;		
-		wordmng.print();
-	}
+	int i = 45;
+	ArtBox hangman;
+	hangman.updateContent({
+		R"(_________)",
+		R"( \|    | )",
+		R"(  |    x )",
+		R"(  |   '|')",
+		R"(  |    ^ )",
+		R"( / \     )",
+		R"(/   \    )"
+	});
+	std::string separator = "+" + std::string(i - 2, '-') + "+";
+	std::cout << separator << std::endl;
+	hangman.draw(i);
+	std::cout << separator << std::endl;
 	return 0;
 }
