@@ -1,14 +1,15 @@
 #include "WordManager.h"
+#include <iostream>
 
 int main() {
-	WordManager wordmng("Indyk myslal o niedzieli, a w sobote glowe mu ucieli");
-	wordmng.print();
+	WordManager wordmng("Jerzy Bodzenta przyjaciel studenta");
 	wordmng.encrypt();
 	wordmng.print();
-	wordmng.decrypt('w');
-	wordmng.decrypt('z');
-	wordmng.decrypt('k');
-	wordmng.decrypt('a');
-	wordmng.print();
+	char ch;
+	while(std::cin >> ch){
+		wordmng.decrypt(ch);
+		std::cout << std::endl;		
+		wordmng.print();
+	}
 	return 0;
 }

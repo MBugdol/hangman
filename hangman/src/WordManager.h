@@ -1,4 +1,5 @@
-#pragma once
+#ifndef WORDMANAGER
+#define WORDMANAGER
 #include <iostream>
 #include <string>
 
@@ -17,3 +18,4 @@ private:
 	std::string m_current;
 };
 
+#endif
