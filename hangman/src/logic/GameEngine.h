@@ -10,7 +10,7 @@ namespace logic {
         void mainloop() const;
         void finalize() const;         
 
-        //needed for getting the absolute path of the project
+        //needed for getting the path of the binary
         //argc in case some flags will be passed to the program
         const int m_mainargc;
         const char** m_mainargv;

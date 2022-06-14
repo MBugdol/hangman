@@ -24,7 +24,6 @@ project "hangman"
     {
         "%{prj.name}/src/**.h",
         "%{prj.name}/src/**.cpp"
-<<<<<<< HEAD
     }
 
     filter "configurations:debug"
@@ -33,7 +32,3 @@ project "hangman"
     filter "configurations:release"
         cppdialect "C++17"
         optimize "on"
-=======
-    }  
-        
->>>>>>> aeaf5544f7fb369d5260cc1cfccb88adcd2eb41a

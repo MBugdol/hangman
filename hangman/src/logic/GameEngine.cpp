@@ -1,7 +1,7 @@
 #include "logic/GameEngine.h"
 #include <filesystem>
-#include <fstream>
 #include <iostream>
+#include "logic/FileManager.h"
 
 namespace logic {
     void GameEngine::start() const {
@@ -17,21 +17,18 @@ namespace logic {
                 - if input not in word, incerase bad guesses
                 - else decode the word using input
                 - check if word is complete / if all guesses have been used up - finish program 
-                - add letter to guessed
         3. Finish program
+                - add letter to guessed
             - leaderboard? ask for name & save score
             - save all necesary data, close program
         */
-       //###SETUP###
        setup();   
        mainloop();
        finalize();   
     }
 
     void GameEngine::setup() const {
-        // get absolute path
-        std::filesystem::path binpath(m_mainargv[0]);
-        std::cout << m_mainargv[0] << "help" << std::endl;
+        FileManager::setDatapathFromMainArgs(m_mainargv);
     }
     void GameEngine::mainloop() const {
 

@@ -61,9 +61,11 @@ endif
 GENERATED :=
 OBJECTS :=
 
+GENERATED += $(OBJDIR)/FileManager.o
 GENERATED += $(OBJDIR)/GameEngine.o
 GENERATED += $(OBJDIR)/WordManager.o
 GENERATED += $(OBJDIR)/main.o
+OBJECTS += $(OBJDIR)/FileManager.o
 OBJECTS += $(OBJDIR)/GameEngine.o
 OBJECTS += $(OBJDIR)/WordManager.o
 OBJECTS += $(OBJDIR)/main.o
@@ -130,6 +132,9 @@ endif
 # File Rules
 # #############################################
 
+$(OBJDIR)/FileManager.o: src/logic/FileManager.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/GameEngine.o: src/logic/GameEngine.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"

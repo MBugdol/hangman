@@ -1,3 +1,7 @@
 TODO LIST - HANGMAN
 
+###IMPORTANT###
+- add input of sentences from file
+
+###OTHERS###
 - make it possible for the original sentence to have '_' in it

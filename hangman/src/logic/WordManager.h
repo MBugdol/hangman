@@ -8,6 +8,7 @@ namespace logic {
 	{
 	public:
 		WordManager(std::string_view word) : m_original(word), m_current(word) {}
+		
 		void encrypt();
 		void decrypt(const char);
 
