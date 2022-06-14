@@ -1,15 +1,6 @@
-#include "WordManager.h"
-#include <iostream>
+#include "logic/GameEngine.h"
 
-int main() {
-	WordManager wordmng("Jerzy Bodzenta przyjaciel studenta");
-	wordmng.encrypt();
-	wordmng.print();
-	char ch;
-	while(std::cin >> ch){
-		wordmng.decrypt(ch);
-		std::cout << std::endl;		
-		wordmng.print();
-	}
-	return 0;
+int main(const int argc, const char** argv) {
+	const logic::GameEngine game(argc, argv);
+	game.start();
 }

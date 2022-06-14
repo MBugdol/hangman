@@ -19,14 +19,10 @@ endif
 # #############################################
 
 RESCOMP = windres
-TARGETDIR = ../bin
-TARGET = $(TARGETDIR)/hangman
 DEFINES +=
-INCLUDES +=
+INCLUDES += -Isrc
 FORCE_INCLUDE +=
 ALL_CPPFLAGS += $(CPPFLAGS) -MMD -MP $(DEFINES) $(INCLUDES)
-ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64
-ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64
 ALL_RESFLAGS += $(RESFLAGS) $(DEFINES) $(INCLUDES)
 LIBS +=
 LDDEPS +=
@@ -40,10 +36,18 @@ define POSTBUILDCMDS
 endef
 
 ifeq ($(config),debug)
-OBJDIR = obj/Debug
+TARGETDIR = ../bin/linux-debug-x86_64
+TARGET = $(TARGETDIR)/hangman
+OBJDIR = ../obj/linux-debug-x86_64
+ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -O0
+ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -O0 -std=c++17
 
 else ifeq ($(config),release)
-OBJDIR = obj/Release
+TARGETDIR = ../bin/linux-release-x86_64
+TARGET = $(TARGETDIR)/hangman
+OBJDIR = ../obj/linux-release-x86_64
+ALL_CFLAGS += $(CFLAGS) $(ALL_CPPFLAGS) -m64 -O2
+ALL_CXXFLAGS += $(CXXFLAGS) $(ALL_CPPFLAGS) -m64 -O2 -std=c++17
 
 endif
 
@@ -57,8 +61,10 @@ endif
 GENERATED :=
 OBJECTS :=
 
+GENERATED += $(OBJDIR)/GameEngine.o
 GENERATED += $(OBJDIR)/WordManager.o
 GENERATED += $(OBJDIR)/main.o
+OBJECTS += $(OBJDIR)/GameEngine.o
 OBJECTS += $(OBJDIR)/WordManager.o
 OBJECTS += $(OBJDIR)/main.o
 
@@ -124,7 +130,10 @@ endif
 # File Rules
 # #############################################
 
-$(OBJDIR)/WordManager.o: src/WordManager.cpp
+$(OBJDIR)/GameEngine.o: src/logic/GameEngine.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/WordManager.o: src/logic/WordManager.cpp
 	@echo $(notdir $<)
 	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/main.o: src/main.cpp
