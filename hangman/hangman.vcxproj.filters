@@ -6,10 +6,14 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="src\hangmanpch.h" />
     <ClInclude Include="src\logic\FileManager.h">
       <Filter>logic</Filter>
     </ClInclude>
     <ClInclude Include="src\logic\GameEngine.h">
+      <Filter>logic</Filter>
+    </ClInclude>
+    <ClInclude Include="src\logic\LogicFunc.h">
       <Filter>logic</Filter>
     </ClInclude>
     <ClInclude Include="src\logic\WordManager.h">
@@ -17,10 +21,14 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\hangmanpch.cpp" />
     <ClCompile Include="src\logic\FileManager.cpp">
       <Filter>logic</Filter>
     </ClCompile>
     <ClCompile Include="src\logic\GameEngine.cpp">
+      <Filter>logic</Filter>
+    </ClCompile>
+    <ClCompile Include="src\logic\LogicFunc.cpp">
       <Filter>logic</Filter>
     </ClCompile>
     <ClCompile Include="src\logic\WordManager.cpp">

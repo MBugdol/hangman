@@ -1,7 +1,5 @@
 #pragma once
-#include <iostream>
-#include <string>
-#include <string_view>
+#include "hangmanpch.h"
 
 namespace logic {
 	class WordManager
@@ -9,6 +7,8 @@ namespace logic {
 	public:
 		WordManager(std::string_view word) : m_original(word), m_current(word) {}
 		
+		void getRandomPhrase();
+
 		void encrypt();
 		void decrypt(const char);
 
@@ -17,5 +17,7 @@ namespace logic {
 	private:
 		std::string m_original;
 		std::string m_current;
+
+		static std::string m_phrases_file;
 	};
 }

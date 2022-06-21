@@ -1,7 +1,6 @@
 #include "logic/GameEngine.h"
-#include <filesystem>
-#include <iostream>
 #include "logic/FileManager.h"
+#include "logic/WordManager.h"
 
 namespace logic {
     void GameEngine::start() const {
@@ -28,7 +27,13 @@ namespace logic {
     }
 
     void GameEngine::setup() const {
-        FileManager::setDatapathFromMainArgs(m_mainargv);
+        FileManager::setDatapath(m_mainargv[0]);
+        //Get database as vector<std::string> and choose a random one
+        //each line = one sentence
+        FileManager filemgr("phrases.data");
+        WordManager wordmgr("x");
+        wordmgr.getRandomPhrase();
+
     }
     void GameEngine::mainloop() const {
 

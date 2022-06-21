@@ -17,13 +17,15 @@ project "hangman"
     targetdir ("bin/" ..outputdir)
     objdir("obj/" ..outputdir)
 
-    includedirs {
-        "%{prj.name}/src"
-    }
-    files
-    {
+    pchheader "hangmanpch.h"
+    pchsource "%{prj.name}/src/hangmanpch.cpp"
+
+    files {
         "%{prj.name}/src/**.h",
         "%{prj.name}/src/**.cpp"
+    }
+    includedirs {
+        "%{prj.name}/src"
     }
 
     filter "configurations:debug"

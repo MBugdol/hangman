@@ -55,7 +55,8 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='debug|x64'">
     <ClCompile>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>hangmanpch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <AdditionalIncludeDirectories>src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Disabled</Optimization>
@@ -67,7 +68,8 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='release|x64'">
     <ClCompile>
-      <PrecompiledHeader>NotUsing</PrecompiledHeader>
+      <PrecompiledHeader>Use</PrecompiledHeader>
+      <PrecompiledHeaderFile>hangmanpch.h</PrecompiledHeaderFile>
       <WarningLevel>Level3</WarningLevel>
       <AdditionalIncludeDirectories>src;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <Optimization>Full</Optimization>
@@ -84,13 +86,19 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="src\hangmanpch.h" />
     <ClInclude Include="src\logic\FileManager.h" />
     <ClInclude Include="src\logic\GameEngine.h" />
+    <ClInclude Include="src\logic\LogicFunc.h" />
     <ClInclude Include="src\logic\WordManager.h" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="src\hangmanpch.cpp">
+      <PrecompiledHeader>Create</PrecompiledHeader>
+    </ClCompile>
     <ClCompile Include="src\logic\FileManager.cpp" />
     <ClCompile Include="src\logic\GameEngine.cpp" />
+    <ClCompile Include="src\logic\LogicFunc.cpp" />
     <ClCompile Include="src\logic\WordManager.cpp" />
     <ClCompile Include="src\main.cpp" />
   </ItemGroup>

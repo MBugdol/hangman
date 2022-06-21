@@ -1,10 +1,9 @@
 #include "logic/FileManager.h"
-#include <iostream>
 
 namespace logic {
     std::filesystem::path FileManager::m_datapath;
-    void FileManager::setDatapathFromMainArgs(const char** argv) {
-        m_datapath = m_datapath / argv[0] / "../../../hangman/data";
+    void FileManager::setDatapath(std::string_view filepath) {
+        m_datapath = m_datapath / filepath / "../../../hangman/data";
         m_datapath = m_datapath.lexically_normal();
     }
     void FileManager::startInput() {

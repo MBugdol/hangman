@@ -1,8 +1,24 @@
 #include "logic/WordManager.h"
-#include <iostream>
-#include <cassert>
+#include "logic/FileManager.h"
+#include "logic/LogicFunc.h"
 
 namespace logic {
+	std::string WordManager::m_phrases_file = "phrases.data";
+
+	//move this to another place
+	void WordManager::getRandomPhrase() {
+		FileManager fmgr(m_phrases_file);	
+		std::vector<std::string> phrases; 
+		std::string phrase;
+		fmgr.startInput();
+		while(std::getline(fmgr.file(), phrase)) {
+			if(phrase.empty()) continue;
+			phrases.emplace_back(phrase);
+		}
+		m_original = phrases[getRandomInt(0, phrases.size()-1)];
+		std::cout << m_original << std::endl;
+	}
+
 	void WordManager::encrypt() {
 		for (char& ch : m_current)
 			ch = std::isalpha(ch) ? '_' : ch;

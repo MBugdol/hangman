@@ -1,4 +1,5 @@
 #pragma once
+#include "hangmanpch.h"
 
 namespace logic {
     class GameEngine {

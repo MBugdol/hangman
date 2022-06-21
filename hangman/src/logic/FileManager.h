@@ -1,14 +1,11 @@
 #pragma once
-#include <string>
-#include <string_view>
-#include <filesystem>
-#include <fstream>
+#include "hangmanpch.h"
 
 namespace logic {
     class FileManager {
     public:
         FileManager(std::string_view sv) : m_fullpath((m_datapath/sv).string()) {}
-        static void setDatapathFromMainArgs(const char**);
+        static void setDatapath(std::string_view);
         
         void startInput();
         void startOutput();

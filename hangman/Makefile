@@ -19,6 +19,9 @@ endif
 # #############################################
 
 RESCOMP = windres
+PCH = src/hangmanpch.h
+PCH_PLACEHOLDER = $(OBJDIR)/$(notdir $(PCH))
+GCH = $(PCH_PLACEHOLDER).gch
 DEFINES +=
 INCLUDES += -Isrc
 FORCE_INCLUDE +=
@@ -63,11 +66,15 @@ OBJECTS :=
 
 GENERATED += $(OBJDIR)/FileManager.o
 GENERATED += $(OBJDIR)/GameEngine.o
+GENERATED += $(OBJDIR)/LogicFunc.o
 GENERATED += $(OBJDIR)/WordManager.o
+GENERATED += $(OBJDIR)/hangmanpch.o
 GENERATED += $(OBJDIR)/main.o
 OBJECTS += $(OBJDIR)/FileManager.o
 OBJECTS += $(OBJDIR)/GameEngine.o
+OBJECTS += $(OBJDIR)/LogicFunc.o
 OBJECTS += $(OBJDIR)/WordManager.o
+OBJECTS += $(OBJDIR)/hangmanpch.o
 OBJECTS += $(OBJDIR)/main.o
 
 # Rules
@@ -132,18 +139,24 @@ endif
 # File Rules
 # #############################################
 
+$(OBJDIR)/hangmanpch.o: src/hangmanpch.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/FileManager.o: src/logic/FileManager.cpp
 	@echo $(notdir $<)
-	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/GameEngine.o: src/logic/GameEngine.cpp
 	@echo $(notdir $<)
-	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+$(OBJDIR)/LogicFunc.o: src/logic/LogicFunc.cpp
+	@echo $(notdir $<)
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/WordManager.o: src/logic/WordManager.cpp
 	@echo $(notdir $<)
-	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 $(OBJDIR)/main.o: src/main.cpp
 	@echo $(notdir $<)
-	$(SILENT) $(CXX) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
+	$(SILENT) $(CXX) -include $(PCH_PLACEHOLDER) $(ALL_CXXFLAGS) $(FORCE_INCLUDE) -o "$@" -MF "$(@:%.o=%.d)" -c "$<"
 
 -include $(OBJECTS:%.o=%.d)
 ifneq (,$(PCH))

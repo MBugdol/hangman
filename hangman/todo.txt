@@ -5,3 +5,4 @@ TODO LIST - HANGMAN
 
 ###OTHERS###
 - make it possible for the original sentence to have '_' in it
+- config file?
