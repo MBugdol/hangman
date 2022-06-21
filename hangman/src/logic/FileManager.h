@@ -5,7 +5,9 @@ namespace logic {
     class FileManager {
     public:
         FileManager(std::string_view sv) : m_fullpath((m_datapath/sv).string()) {}
-        static void setDatapath(std::string_view);
+        ~FileManager() {m_file.close();}
+
+        static void setDatapath(std::string_view filepath);
         
         void startInput();
         void startOutput();

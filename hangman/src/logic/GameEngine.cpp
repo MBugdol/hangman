@@ -1,23 +1,24 @@
 #include "logic/GameEngine.h"
 #include "logic/FileManager.h"
 #include "logic/WordManager.h"
+#include "logic/LogicFunc.h"
 
 namespace logic {
-    void GameEngine::start() const {
+    void GameEngine::start() {
         /*
-        1. Setup:
-            - choose a random sentence from database
+        1. [v] Initialize:
+            [v] choose a random sentence from phrases file
         2. Start main loop:
             a) initial:
                 - display ui
                 - get user input
             b) logic:
-                - check if letter was already guessed - if yes, go back to a
+                [v] check if letter was already guessed - if yes, skip this iteration
+                [v] add letter to guessed
                 - if input not in word, incerase bad guesses
-                - else decode the word using input
-                - check if word is complete / if all guesses have been used up - finish program 
+                [v] else decode the word using input
+                [v] check if word is complete / if all guesses have been used up - finish program 
         3. Finish program
-                - add letter to guessed
             - leaderboard? ask for name & save score
             - save all necesary data, close program
         */
@@ -26,19 +27,27 @@ namespace logic {
        finalize();   
     }
 
-    void GameEngine::setup() const {
+    void GameEngine::setup() {
         FileManager::setDatapath(m_mainargv[0]);
-        //Get database as vector<std::string> and choose a random one
-        //each line = one sentence
-        FileManager filemgr("phrases.data");
-        WordManager wordmgr("x");
-        wordmgr.getRandomPhrase();
-
+        m_word = WordManager(WordManager::randomPhrase());
+        m_word.encrypt();
     }
-    void GameEngine::mainloop() const {
-
+    void GameEngine::mainloop() {
+        bool running = true;
+        std::cout << m_word << std::endl;
+        while(running) {
+           //displayUI
+           //"get input"
+           char ch = 'a' + randomInt(0, 25);
+           //process input
+           m_word.processInput(ch);
+           std::cout << m_word << std::endl;
+           if(m_word.allGuessed()) {
+               running = false;
+           }
+        }
     }
-    void GameEngine::finalize() const {
+    void GameEngine::finalize() {
 
     }
 }

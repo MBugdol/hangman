@@ -5,18 +5,28 @@
 namespace logic {
 	std::string WordManager::m_phrases_file = "phrases.data";
 
-	//move this to another place
-	void WordManager::getRandomPhrase() {
-		FileManager fmgr(m_phrases_file);	
-		std::vector<std::string> phrases; 
-		std::string phrase;
+	void WordManager::processInput(const char input_ch) {
+		if(!std::isalpha(input_ch)) 
+			throw std::invalid_argument{"logic::WordManager::processInput | input must be alphabetic!"};
+		if(wasGuessed(input_ch)) {
+			std::cout << "Letter \"" << input_ch << "\" has already been entered!" << std::endl;
+			return;
+		} 
+		decrypt(input_ch);
+	}
+
+	bool WordManager::wasGuessed(const char ch) {
+		int bit_pos = std::tolower(ch) - 'a';
+		bool guessed = m_guessed_letters[bit_pos];
+		if(!guessed) m_guessed_letters[bit_pos] = true;
+		return guessed;
+	}
+
+	std::string WordManager::randomPhrase() {
+		FileManager fmgr{m_phrases_file};	
 		fmgr.startInput();
-		while(std::getline(fmgr.file(), phrase)) {
-			if(phrase.empty()) continue;
-			phrases.emplace_back(phrase);
-		}
-		m_original = phrases[getRandomInt(0, phrases.size()-1)];
-		std::cout << m_original << std::endl;
+		std::vector<std::string> sentences = splitStream(fmgr.file());
+		return sentences[randomInt(0, sentences.size()-1)];
 	}
 
 	void WordManager::encrypt() {
@@ -29,7 +39,7 @@ namespace logic {
 		for (int i = 0; i < m_current.length(); i++) {
 			char& current_ch = m_current[i];
 			char original_ch = m_original[i];
-			if (current_ch != '_') continue;
+			if (current_ch != '_' || original_ch == '_' ) continue;
 			if (input_ch == std::tolower(original_ch))
 				current_ch = original_ch;
 		}

@@ -2,5 +2,6 @@
 #include "hangmanpch.h"
 
 namespace logic {
-    int getRandomInt(int=0, int=0);
+    int randomInt(int min=0, int max=0);
+    std::vector<std::string> splitStream(std::istream& istr, char delim = '\n');
 }
